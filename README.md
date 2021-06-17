@@ -1,2 +1,6 @@
-# uniapp-boot
-采用uniapp编写小程序  封装通用接口、带权限的底部菜单、混入列表加载更多等功能
+XIAOTU BOOT 移动、PC、多端管理平台（前后端分离版本）
+===============
+项目介绍：
+-----------------------------------
+XiaotuBoot 前后端分离架构 SpringBoot2.x，SpringCloud，Mybatis-plus，Shiro，JWTAnt Design&Vue。
+
