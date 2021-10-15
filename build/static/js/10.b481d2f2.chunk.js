@@ -1,0 +1,2 @@
+(this["webpackJsonpzbtx-base-pc-react"]=this["webpackJsonpzbtx-base-pc-react"]||[]).push([[10],{418:function(t,c,e){"use strict";e.r(c),c.default=e.p+"static/media/\u7cfb\u7edf\u5168\u5c40\u9875\u9762\u5199\u8fd9\u91cc.31d6cfe0.md"}}]);
+//# sourceMappingURL=10.b481d2f2.chunk.js.map

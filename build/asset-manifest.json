@@ -1,0 +1,43 @@
+{
+  "files": {
+    "static/js/0.662fbaf5.chunk.js": "/static/js/0.662fbaf5.chunk.js",
+    "static/js/0.662fbaf5.chunk.js.map": "/static/js/0.662fbaf5.chunk.js.map",
+    "static/js/1.47a0d6c7.chunk.js": "/static/js/1.47a0d6c7.chunk.js",
+    "static/js/1.47a0d6c7.chunk.js.map": "/static/js/1.47a0d6c7.chunk.js.map",
+    "static/js/2.33e38f55.chunk.js": "/static/js/2.33e38f55.chunk.js",
+    "static/js/2.33e38f55.chunk.js.map": "/static/js/2.33e38f55.chunk.js.map",
+    "static/js/3.0d8263b5.chunk.js": "/static/js/3.0d8263b5.chunk.js",
+    "static/js/3.0d8263b5.chunk.js.map": "/static/js/3.0d8263b5.chunk.js.map",
+    "static/js/4.6675d819.chunk.js": "/static/js/4.6675d819.chunk.js",
+    "static/js/4.6675d819.chunk.js.map": "/static/js/4.6675d819.chunk.js.map",
+    "static/js/5.0b2e0b85.chunk.js": "/static/js/5.0b2e0b85.chunk.js",
+    "static/js/5.0b2e0b85.chunk.js.map": "/static/js/5.0b2e0b85.chunk.js.map",
+    "main.css": "/static/css/main.32cbb237.chunk.css",
+    "main.js": "/static/js/main.a8f11b5f.chunk.js",
+    "main.js.map": "/static/js/main.a8f11b5f.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.e2ec8c03.js",
+    "runtime-main.js.map": "/static/js/runtime-main.e2ec8c03.js.map",
+    "static/css/8.bce6452b.chunk.css": "/static/css/8.bce6452b.chunk.css",
+    "static/js/8.b8e8f77b.chunk.js": "/static/js/8.b8e8f77b.chunk.js",
+    "static/js/8.b8e8f77b.chunk.js.map": "/static/js/8.b8e8f77b.chunk.js.map",
+    "static/js/9.ff30bdc7.chunk.js": "/static/js/9.ff30bdc7.chunk.js",
+    "static/js/9.ff30bdc7.chunk.js.map": "/static/js/9.ff30bdc7.chunk.js.map",
+    "static/js/10.b481d2f2.chunk.js": "/static/js/10.b481d2f2.chunk.js",
+    "static/js/10.b481d2f2.chunk.js.map": "/static/js/10.b481d2f2.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/8.bce6452b.chunk.css.map": "/static/css/8.bce6452b.chunk.css.map",
+    "static/css/main.32cbb237.chunk.css.map": "/static/css/main.32cbb237.chunk.css.map",
+    "static/js/0.662fbaf5.chunk.js.LICENSE.txt": "/static/js/0.662fbaf5.chunk.js.LICENSE.txt",
+    "static/js/8.b8e8f77b.chunk.js.LICENSE.txt": "/static/js/8.b8e8f77b.chunk.js.LICENSE.txt",
+    "static/media/logo.51586d6b.svg": "/static/media/logo.51586d6b.svg",
+    "static/media/模块业务代码写这里.md": "/static/media/模块业务代码写这里.31d6cfe0.md",
+    "static/media/系统全局页面写这里.md": "/static/media/系统全局页面写这里.31d6cfe0.md"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e2ec8c03.js",
+    "static/css/8.bce6452b.chunk.css",
+    "static/js/8.b8e8f77b.chunk.js",
+    "static/css/main.32cbb237.chunk.css",
+    "static/js/main.a8f11b5f.chunk.js"
+  ]
+}

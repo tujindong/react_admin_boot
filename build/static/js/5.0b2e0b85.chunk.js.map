@@ -1,0 +1,1 @@
+{"version":3,"sources":["pages/views/user/login.js"],"names":["Login"],"mappings":"kJAGeA,UAHD,WACV,OAAO","file":"static/js/5.0b2e0b85.chunk.js","sourcesContent":["const Login = () => {\r\n    return <div>这是登录页面</div>\r\n}\r\nexport default Login;"],"sourceRoot":""}
