@@ -117,7 +117,7 @@ const SideMenu = (props) => {
             <div className="logo">
                 <Link to="/">
                     <img src={logo} alt="logo" />
-                    {!isCollapsed && <h1>智博天下</h1>}
+                    {!isCollapsed && <h1>AdminBoot</h1>}
                 </Link>
             </div>
         )

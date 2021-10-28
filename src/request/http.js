@@ -19,8 +19,6 @@ service.interceptors.request.use(
     },
     (error) => {
         switch (error.code) {
-            case 1012:
-                break
             default:
                 message.error(error.msg)
         }
@@ -35,21 +33,8 @@ service.interceptors.response.use(
         const data = response.data
         if (response.status === 200) {
             switch (data.code) {
-                case 0:
-                    return Promise.resolve(data)
                 case 200:
                     return Promise.resolve(data)
-                case -1:
-                    message.error(data.msg)
-                    return Promise.reject(data)
-                case 1012:
-                    Modal.info({
-                        content: data.msg,
-                        onOk() {
-                            window.location.hash = "/login"
-                        }
-                    })
-                    break
                 default:
                     message.error(data.msg)
                     return Promise.reject(data)
@@ -61,7 +46,7 @@ service.interceptors.response.use(
     },
     // 服务器状态码不是200的情况
     (error) => {
-        console.log('响应error', error, '响应error response', error.response)
+        // console.log('响应error', error, '响应error response', error.response)
         message.error(error.response.data)
         return Promise.reject(error.response.data)
     }
