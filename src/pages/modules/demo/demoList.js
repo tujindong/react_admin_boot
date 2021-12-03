@@ -87,10 +87,10 @@ const DemoList = (props) => {
                                     overlay={
                                         <Menu>
                                             <Menu.Item key="1">
-                                                <a onClick={() => {}}>查看</a>
+                                                <a onClick={() => { }}>查看</a>
                                             </Menu.Item>
                                             <Menu.Item key="2">
-                                                <a onClick={() => {}}>指派</a>
+                                                <a onClick={() => { }}>指派</a>
                                             </Menu.Item>
                                         </Menu>
                                     }

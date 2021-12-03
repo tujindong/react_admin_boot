@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useImperativeHandle, forwardRef, useRef } from "react";
 import { Table, Card, Tooltip, message } from "antd";
 import TableForm from "./TableForm";
-import { debounce } from "lodash";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import ColumnsSetting from "./columnsSetting";
 import ExportExcel from "js-export-excel";
+import { isEqual, debounce } from "lodash";
 import { ReloadOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 
 const Div = styled.div`
@@ -82,21 +82,27 @@ const Div = styled.div`
  */
 
 const ProTable = forwardRef((props, ref) => {
-    const density = "default";
+
+    //自定义先前状态钩子
+    const usePrevState = (value) => {
+        const ref = useRef();
+        useEffect(() => {
+            ref.current = value;
+        })
+        return ref.current;
+    }
+
     const [dataSource, setDataSource] = useState([]);
     const [tableColumns, setTableColumns] = useState(props.columns || []);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [pagination, setPagination] = useState({
-        page: 1,
-        page_size: 10,
-    });
+    const [pagination, setPagination] = useState({ page: 1, page_size: 10 });
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
-    const [searchFormValue, setSearchFormValue] = useState({
-        FIRST_TIME_LOADING_TAG: true,
-    });
-    const [forceUpdate, setForceUpdate] = useState(false);
+    const [searchFormValue, setSearchFormValue] = useState({ FIRST_TIME_LOADING_TAG: true });
+
+    const prevPagination = usePrevState(pagination);
+    const prevSearchFormValue = usePrevState(searchFormValue);
 
     const tableFormRef = useRef();
 
@@ -107,29 +113,14 @@ const ProTable = forwardRef((props, ref) => {
         },
     }));
 
-    useEffect(() => {
-        const { onRef } = props;
-        onRef && onRef(this);
-        fetchData();
-        // eslint-disable-next-line
-    }, []);
 
     useEffect(() => {
-        fetchData();
-        // eslint-disable-next-line
-    }, [pagination, searchFormValue]);
-    useEffect(() => {
-        if (forceUpdate === true) {
+        if (!isEqual(prevPagination, pagination) || !isEqual(searchFormValue, prevSearchFormValue)) {
             fetchData();
         }
         // eslint-disable-next-line
-    }, [forceUpdate]);
+    }, [searchFormValue, pagination]);
 
-    //设置初始化选中值
-    // eslint-disable-next-line
-    const setInitialSelectionRowKeys = (selectedRowKeys) => {
-        setSelectedRowKeys(selectedRowKeys);
-    };
 
     //设置分页
     const setPaginationMethod = (page, page_size) => {
@@ -140,7 +131,6 @@ const ProTable = forwardRef((props, ref) => {
     const fetchData = debounce(
         async (params = {}) => {
             let { request } = props;
-            // 如果没有request，模拟请求
             if (!request) return;
             setLoading(true);
             try {
@@ -168,13 +158,11 @@ const ProTable = forwardRef((props, ref) => {
                 setDataSource(data.data);
                 setTotal(data.total);
                 setLoading(false);
-                setForceUpdate(false);
             } catch (error) {
                 console.warn(error);
                 message.warn(error.msg);
                 setDataSource([]);
                 setLoading(false);
-                setForceUpdate(false);
             }
         },
         30,
@@ -273,7 +261,6 @@ const ProTable = forwardRef((props, ref) => {
         rowKey,
         columns,
         columnsSettingDisabled = false,
-        density: densityDisabled,
         ...other
     } = props;
     const filterColumns = columns.filter((o) => o.type && !o.hideInSearch);
@@ -340,7 +327,7 @@ const ProTable = forwardRef((props, ref) => {
 
                 <Table
                     {...other}
-                    size={densityDisabled || density}
+                    size={'default'}
                     loading={loading}
                     rowKey={rowKey}
                     dataSource={dataSource}
@@ -407,26 +394,26 @@ const ProTable = forwardRef((props, ref) => {
                     rowSelection={
                         rowSelection
                             ? {
-                                  selectedRowKeys,
-                                  ...rowSelection,
-                                  onChange: (selectedRowKeys, selectedRows) => {
-                                      if (rowSelection && rowSelection.onChange) {
-                                          rowSelection.onChange(selectedRowKeys, selectedRows);
-                                      }
-                                      setSelectedRowKeys(selectedRowKeys);
-                                      setSelectedRows(selectedRows);
-                                  },
-                                  getCheckboxProps: (record) => {
-                                      if (rowSelection && rowSelection.getCheckboxProps) {
-                                          return rowSelection.getCheckboxProps(record, {
-                                              selectedRowKeys,
-                                              selectedRows,
-                                              dataSource,
-                                          });
-                                      }
-                                      return undefined;
-                                  },
-                              }
+                                selectedRowKeys,
+                                ...rowSelection,
+                                onChange: (selectedRowKeys, selectedRows) => {
+                                    if (rowSelection && rowSelection.onChange) {
+                                        rowSelection.onChange(selectedRowKeys, selectedRows);
+                                    }
+                                    setSelectedRowKeys(selectedRowKeys);
+                                    setSelectedRows(selectedRows);
+                                },
+                                getCheckboxProps: (record) => {
+                                    if (rowSelection && rowSelection.getCheckboxProps) {
+                                        return rowSelection.getCheckboxProps(record, {
+                                            selectedRowKeys,
+                                            selectedRows,
+                                            dataSource,
+                                        });
+                                    }
+                                    return undefined;
+                                },
+                            }
                             : undefined
                     }
                 />

@@ -15,7 +15,7 @@ const ColumnsSetting = (props) => {
         item.key = item.dataIndex || "operate";
         item.disabled = !item.dataIndex;
     });
-    
+
     const allCheckedKeys = props.columns.map((item) => item.dataIndex).filter((item) => !!item) || [];
     const [checkedKeys, setCheckedKeys] = useState(allCheckedKeys);
     const [isCheckedAll, setIsCheckedAll] = useState(false);
@@ -49,7 +49,7 @@ const ColumnsSetting = (props) => {
                     >
                         列展示
                     </Checkbox>
-                    <span 
+                    <span
                         style={{ color: '#1890ff' }}
                         onClick={() => {
                             setCheckedKeys(allCheckedKeys);
@@ -69,13 +69,7 @@ const ColumnsSetting = (props) => {
                         draggable={false}
                         checkable={true}
                         onDrop={(info) => {
-                            // 功能为 优化的，较复杂 暂时没有写
-                            // const dropKey = info.node.key; // 目标
-                            // const dragKey = info.dragNode.key; // 拖拽
-                            // const { dropPosition, dropToGap } = info;
-                            // const position = dropPosition === -1 || !dropToGap ? dropPosition + 1 : dropPosition;
-                            // console.log('------onDrop', info, dragKey, dropKey, position)
-                            // move(dragKey, dropKey, position);
+                            console.log('columnsSetting onDrop')
                         }}
                         blockNode
                         onCheck={(rowKeySelection) => {
