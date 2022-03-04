@@ -1,11 +1,12 @@
 import '@/assets/css/index.less';
 import dva from 'dva';
-import createHistory from 'history/createHashHistory';
+import { createHashHistory } from 'history';
 
 //1. 初始化
 const app = dva({
-    history: createHistory(),
+    history: createHashHistory(),
 });
+
 
 //2. 路由
 app.router(require('@/router/router').default);
