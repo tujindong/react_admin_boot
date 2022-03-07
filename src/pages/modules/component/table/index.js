@@ -1,9 +1,9 @@
 import { useRef, useState } from "react";
-import ProTable from "@/components/ProTable/ProTable";
+import { ProTable } from "@/components";
 import { Button, Divider, Popconfirm, Dropdown, Menu } from "antd";
 import AddEdit from "./components/addEdit";
 
-const DemoList = (props) => {
+const Index = (props) => {
     const addEditRef = useRef();
     const proTableRef = useRef();
 
@@ -11,8 +11,8 @@ const DemoList = (props) => {
         <>
             <ProTable
                 ref={proTableRef}
-                title="戏如人森"
-                description="不要看我，只是个demo"
+                title="高级表格"
+                description="无需编写额外代码，简单配置即可生成简单的增删改查页面"
                 request={() => {
                     return new Promise((resolve, reject) => {
                         setTimeout(() => {
@@ -123,4 +123,4 @@ const DemoList = (props) => {
         </>
     );
 };
-export default DemoList;
+export default Index;

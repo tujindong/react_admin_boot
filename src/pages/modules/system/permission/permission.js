@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import ProTable from "@/components/ProTable/ProTable";
+import { ProTable } from "@/components";
 import { Button, Divider, Popconfirm, Dropdown, Menu } from "antd";
 import { dynamicMenuData } from "@/router/menu"; //这个是接口返回的
 import AddEdit from "./components/addEdit";
@@ -72,10 +72,10 @@ const DemoList = (props) => {
                                     overlay={
                                         <Menu>
                                             <Menu.Item key="1">
-                                                <a onClick={() => {}}>查看</a>
+                                                <a onClick={() => { }}>查看</a>
                                             </Menu.Item>
                                             <Menu.Item key="2">
-                                                <a onClick={() => {}}>添加下级</a>
+                                                <a onClick={() => { }}>添加下级</a>
                                             </Menu.Item>
                                         </Menu>
                                     }

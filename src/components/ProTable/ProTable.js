@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useImperativeHandle, forwardRef, useRef } from "react";
 import { Table, Card, Tooltip, message } from "antd";
-import TableForm from "./TableForm";
+import SearchForm from "./searchForm";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import ColumnsSetting from "./columnsSetting";
@@ -9,8 +9,11 @@ import { isEqual, debounce } from "lodash";
 import { ReloadOutlined, QuestionCircleOutlined } from "@ant-design/icons";
 
 const Div = styled.div`
-    .mb20 {
-        margin-bottom: 20px;
+    .filter-wrap{
+        margin-bottom: 10px;
+        .ant-card-body{
+            padding-bottom: 0;
+        }
     }
     .table-title {
         color: #555555;
@@ -267,9 +270,9 @@ const ProTable = forwardRef((props, ref) => {
 
     return (
         <Div>
-            <div className="filter-wrap mb20" hidden={filterColumns.length === 0}>
+            <div className="filter-wrap" hidden={filterColumns.length === 0}>
                 <Card bordered={false}>
-                    <TableForm
+                    <SearchForm
                         ref={tableFormRef}
                         onSubmit={(values) => {
                             setPaginationMethod(1, pagination.page_size);

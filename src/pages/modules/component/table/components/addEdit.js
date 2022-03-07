@@ -42,7 +42,7 @@ const AddEdit = (props, ref) => {
                     setVisible(false);
                 }, 800);
             })
-            .catch((err) => {});
+            .catch((err) => { });
     };
 
     const renderFormDom = () => {
