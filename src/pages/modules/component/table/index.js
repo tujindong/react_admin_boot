@@ -1,6 +1,7 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { ProTable } from "@/components";
 import { Button, Divider, Popconfirm, Dropdown, Menu } from "antd";
+import { getAction } from '@/request/manage';
 import AddEdit from "./components/addEdit";
 
 const Index = (props) => {
@@ -10,54 +11,51 @@ const Index = (props) => {
     return (
         <>
             <ProTable
+                rowKey="id"
                 ref={proTableRef}
                 title="高级表格"
                 description="无需编写额外代码，简单配置即可生成简单的增删改查页面"
                 request={() => {
                     return new Promise((resolve, reject) => {
-                        setTimeout(() => {
+                        getAction("/api/test", {}).then(res => {
                             resolve({
-                                total: 10,
-                                data: [
-                                    {
-                                        demo: "demo数据1",
-                                        demo1: "demo1",
-                                        id: "demo1",
-                                        key: "demo1",
-                                    },
-                                    {
-                                        demo: "demo数据2",
-                                        demo1: "demo2",
-                                        id: "demo2",
-                                        key: "demo2",
-                                    },
-                                ],
-                            });
-                        }, 1000);
+                                data: res.result.records,
+                                total: res.result.total
+                            })
+                        })
                     });
                 }}
                 columns={[
                     {
-                        dataIndex: "demo",
-                        title: "宇宙",
+                        dataIndex: "name",
+                        title: "姓名",
                         type: "input",
                     },
                     {
-                        dataIndex: "demo1",
-                        title: "世界",
+                        dataIndex: "sex",
+                        title: "性别",
                         type: "select",
                         formItemProps: {
                             options: [
                                 {
-                                    value: "1111",
-                                    label: "demo1",
+                                    value: false,
+                                    label: "女",
                                 },
                                 {
-                                    value: "2222",
-                                    label: "demo2",
+                                    value: true,
+                                    label: "男",
                                 },
                             ],
                         },
+                    },
+                    {
+                        dataIndex: "age",
+                        title: "年龄",
+                        type: "input",
+                    },
+                    {
+                        dataIndex: "birthday",
+                        title: "生日",
                     },
                     {
                         title: "操作",

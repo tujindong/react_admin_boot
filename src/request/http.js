@@ -6,15 +6,13 @@ import axios from "axios"
 import Cookies from "js-cookie"
 
 const service = axios.create({
-    baseURL: "/ajax/v1.0",
+    baseURL: "",
     timeout: 30000
 })
 
 // 请求拦截器
 service.interceptors.request.use(
     (config) => {
-        let csrftoken = Cookies.get("csrftoken")
-        csrftoken && (config.headers["X-CSRFToken"] = csrftoken)
         return config
     },
     (error) => {
@@ -29,7 +27,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     (response) => {
-        // console.log('响应response', response)
+        console.log('响应response', response)
         const data = response.data
         if (response.status === 200) {
             switch (data.code) {

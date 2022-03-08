@@ -41,14 +41,14 @@ const formItemLayout = {
         sm: { span: 18 },
     },
 }
-const TableForm = (props, ref) =>{
+const TableForm = (props, ref) => {
 
     const { filterForm } = props
 
     const [isCollapse, setIsCollapse] = useState(true) //  默认 收起
 
     const [form] = Form.useForm();
-    
+
     const submit = () => {
         const values = form.getFieldsValue()
         if (props.onSubmit) {
@@ -56,7 +56,7 @@ const TableForm = (props, ref) =>{
         }
     }
 
-    useImperativeHandle(ref, ()=>({
+    useImperativeHandle(ref, () => ({
         reset: () => {
             form.resetFields()
             submit()
@@ -65,7 +65,7 @@ const TableForm = (props, ref) =>{
 
     return (
         <Layout>
-        {/* layout='inline' ant design 4.X 会很挤*/}
+            {/* layout='inline' ant design 4.X 会很挤*/}
             <Form
                 onFinish={() => {
                     submit()
@@ -78,12 +78,11 @@ const TableForm = (props, ref) =>{
                     {/* filterForm的长度超过2个，则展开 收起 */}
                     {filterForm.map((item, index) => (
                         (((index + 1) > collapseNum && !isCollapse) || (index + 1) <= collapseNum) && <Col xxl={6} xl={8} md={12} xs={24} key={index}>
-                            <Form.Item style={{ width: '100%' }} 
-                                label={item.formItemProps?.labelTitle || item.title} 
+                            <Form.Item style={{ width: '100%' }}
+                                label={item.formItemProps?.labelTitle || item.title}
                                 initialValue={item.initialValue}
                                 name={item.key}>
-                                {/* {getFieldDecorator(item.key || item.dataIndex, { initialValue: item.initialValue })(FilterControl.getControlComponent(item.type, { ...item }))} */}
-                                { FilterControl.getControlComponent(item.type, { ...item }) }
+                                {FilterControl.getControlComponent(item.type, { ...item })}
                             </Form.Item>
                         </Col>
 

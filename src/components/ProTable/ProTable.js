@@ -99,7 +99,7 @@ const ProTable = forwardRef((props, ref) => {
     const [tableColumns, setTableColumns] = useState(props.columns || []);
     const [total, setTotal] = useState(0);
     const [loading, setLoading] = useState(false);
-    const [pagination, setPagination] = useState({ page: 1, page_size: 10 });
+    const [pagination, setPagination] = useState({ pageNo: 1, pageSize: 10 });
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
     const [searchFormValue, setSearchFormValue] = useState({ FIRST_TIME_LOADING_TAG: true });
@@ -126,8 +126,8 @@ const ProTable = forwardRef((props, ref) => {
 
 
     //设置分页
-    const setPaginationMethod = (page, page_size) => {
-        setPagination({ page, page_size });
+    const setPaginationMethod = (pageNo, pageSize) => {
+        setPagination({ pageNo, pageSize });
     };
 
     //请求列表数据
@@ -142,14 +142,14 @@ const ProTable = forwardRef((props, ref) => {
                     ...pagination,
                     ...params,
                 });
-                // 如果查总条数 小于 page*page_size
-                if (data.total < (pagination.page - 1) * pagination.page_size + 1 && data.total !== 0) {
+                // 如果查总条数 小于 pageNo*pageSize
+                if (data.total < (pagination.pageNo - 1) * pagination.pageSize + 1 && data.total !== 0) {
                     setPaginationMethod(
                         (prevState) => {
                             return {
                                 pagination: {
-                                    page: prevState.pagination.page - 1,
-                                    page_size: prevState.pagination.page_size,
+                                    pageNo: prevState.pagination.pageNo - 1,
+                                    pageSize: prevState.pagination.pageSize,
                                 },
                             };
                         },
@@ -275,7 +275,7 @@ const ProTable = forwardRef((props, ref) => {
                     <SearchForm
                         ref={tableFormRef}
                         onSubmit={(values) => {
-                            setPaginationMethod(1, pagination.page_size);
+                            setPaginationMethod(1, pagination.pageSize);
                             resetRowSelection();
                             setSearchFormValues(beforeSearchSubmit(values));
                         }}
@@ -384,11 +384,11 @@ const ProTable = forwardRef((props, ref) => {
                         total,
                         showSizeChanger: true,
                         showQuickJumper: true,
-                        current: pagination.page,
-                        pageSize: pagination.page_size,
+                        current: pagination.pageNo,
+                        pageSize: pagination.pageSize,
                         showTotal: (total, range) => `共${total}条`,
-                        onChange: (page, page_size) => {
-                            setPaginationMethod(page, page_size);
+                        onChange: (pageNo, pageSize) => {
+                            setPaginationMethod(pageNo, pageSize);
                         },
                         onShowSizeChange: (current, pageSize) => {
                             setPaginationMethod(current, pageSize);
@@ -438,7 +438,7 @@ ProTable.propTypes = {
      *
      * ```js
      * //类型
-     * (params?: {pageSize: number;page: number;[key: string]: any;}) => Promise<RequestData<T>>
+     * (params?: {pageSize: number;pageNo: number;[key: string]: any;}) => Promise<RequestData<T>>
      * ```
      */
 
@@ -466,7 +466,7 @@ ProTable.propTypes = {
      * (params:T)=>T
      *
      * //例子
-     * (values) => ({...values, current: values.page})
+     * (values) => ({...values, current: values.pageNo})
      * ```
      */
     beforeSearchSubmit: PropTypes.func,
