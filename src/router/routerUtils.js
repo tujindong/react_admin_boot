@@ -20,16 +20,21 @@ export const transformTreeToFlat = (tree, result = []) => {
 export const asyncImportComponent = (importComp) => {
     function AsyncComponent(props) {
         const [Component, setComponent] = useState(null)
+
         useEffect(() => {
+            let isUnmount = false;
             async function fetchComponent() {
                 try {
                     const { default: importComponent } = await importComp()
-                    setComponent(() => importComponent)
+                    if (!isUnmount) {
+                        setComponent(() => importComponent)
+                    }
                 } catch (e) {
                     props.history.replace('/404')
                 }
             }
             fetchComponent()
+            return () => isUnmount = true;
             // eslint-disable-next-line
         }, [])
         return (

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useImperativeHandle, forwardRef, useRef } from "react";
+import React, { useEffect, useState, useImperativeHandle, forwardRef, useRef, memo } from "react";
 import { Table, Card, Tooltip, message } from "antd";
 import SearchForm from "./searchForm";
 import PropTypes from "prop-types";
@@ -102,7 +102,7 @@ const ProTable = forwardRef((props, ref) => {
     const [pagination, setPagination] = useState({ pageNo: 1, pageSize: 10 });
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
     const [selectedRows, setSelectedRows] = useState([]);
-    const [searchFormValue, setSearchFormValue] = useState({ FIRST_TIME_LOADING_TAG: true });
+    const [searchFormValue, setSearchFormValue] = useState({});
 
     const prevPagination = usePrevState(pagination);
     const prevSearchFormValue = usePrevState(searchFormValue);
@@ -116,14 +116,11 @@ const ProTable = forwardRef((props, ref) => {
         },
     }));
 
-
     useEffect(() => {
         if (!isEqual(prevPagination, pagination) || !isEqual(searchFormValue, prevSearchFormValue)) {
             fetchData();
         }
-        // eslint-disable-next-line
     }, [searchFormValue, pagination]);
-
 
     //设置分页
     const setPaginationMethod = (pageNo, pageSize) => {
@@ -534,4 +531,4 @@ ProTable.propTypes = {
     columns: PropTypes.array.isRequired,
 };
 
-export default ProTable;
+export default memo(ProTable);

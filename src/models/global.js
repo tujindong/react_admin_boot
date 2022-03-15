@@ -15,7 +15,6 @@ export default {
     effects: {
         *login({ payload }, { call, put }) {
             const res = yield postAction('/login/', payload);
-            console.log('res', res)
             if (res.code === 200) {
                 message.success("登录成功！")
                 yield put(routerRedux.push('/'))

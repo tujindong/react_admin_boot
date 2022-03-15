@@ -63,7 +63,6 @@ const Div = styled.div`
 const GlobalHeader = (props) => {
     const { isCollapsed } = props;
     const loginOut = () => {
-        console.log('退出登录~~~')
         confirm({
             title: '提示',
             icon: <QuestionCircleOutlined />,

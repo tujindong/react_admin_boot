@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styled from 'styled-components';
 const Div = styled.div`
     width: 100%;
@@ -12,6 +13,11 @@ const Div = styled.div`
 `;
 
 const Home = (props) => {
+
+    useEffect(() => {
+
+    })
+
     return (
         <Div>
             <div className='name'>react-admin-boot</div>

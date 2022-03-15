@@ -14,7 +14,6 @@ const RangePickerSelect = (props, ref) => {
     } = props
     const transformTimeToDate = (values) => {
         if (Array.isArray(values) && values.length === 2) {
-            console.log(values)
             return values.map(item => item && moment(item))
         }
         return values

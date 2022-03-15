@@ -27,7 +27,7 @@ service.interceptors.request.use(
 // 响应拦截器
 service.interceptors.response.use(
     (response) => {
-        console.log('响应response', response)
+        // console.log('响应response', response)
         const data = response.data
         if (response.status === 200) {
             switch (data.code) {

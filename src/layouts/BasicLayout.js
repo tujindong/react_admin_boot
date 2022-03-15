@@ -131,6 +131,7 @@ const BasicLayout = (props) => {
                         setActiveTabKey(e)
                     }}
                     onEdit={(targetKey, action) => handleTabsRemove(targetKey)}
+                    destroyInactiveTabPane
                 >
                     {tabList.map((item) => (
                         <TabPane tab={item.title} key={item.path} closable={item.closable}>

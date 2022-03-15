@@ -36,7 +36,6 @@ const AddEdit = (props, ref) => {
                 const params = { ...record, ...values };
                 setSubmitLoading(true);
                 setTimeout(() => {
-                    console.log("新增编辑的表单数据", params);
                     props.onOk && props.onOk();
                     setSubmitLoading(false);
                     setVisible(false);

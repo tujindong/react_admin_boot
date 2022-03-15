@@ -72,6 +72,17 @@ const dynamicMenuData = [
                 keepAlive: false,
                 title: '高级表格',
             },
+            {
+                componentPath: 'modules/component/searchSelect',
+                id: '4-2',
+                key: '4-2',
+                path: '/component/searchSelect',
+                name: 'component-searchSelect',
+                redirect: null,
+                icon: '',
+                keepAlive: false,
+                title: '远程搜索',
+            },
         ]
     },
     {
