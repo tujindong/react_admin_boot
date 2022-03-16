@@ -1,6 +1,7 @@
 import React, { useState, useImperativeHandle, forwardRef } from "react";
 import { Modal, Form, Input } from "antd";
 import { pick } from "lodash";
+import { postAction } from '@/request/manage';
 
 const AddEdit = (props, ref) => {
     const [form] = Form.useForm();
@@ -95,11 +96,11 @@ const AddEdit = (props, ref) => {
                     .then(async (values) => {
                         const params = { ...record, ...values };
                         setSubmitLoading(true);
-                        setTimeout(() => {
+                        postAction("/api/table/curd", params).then(res => {
                             props.onOk && props.onOk();
                             setSubmitLoading(false);
                             setVisible(false);
-                        }, 800);
+                        })
                     })
                     .catch((err) => { });
             }}

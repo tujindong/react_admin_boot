@@ -39,7 +39,7 @@ const Index = (props) => {
                 description="无需编写额外代码，简单配置即可生成简单的增删改查页面"
                 request={(params) => {
                     return new Promise((resolve, reject) => {
-                        getAction("/api/tablelist", { ...params }).then(res => {
+                        getAction("/api/table/curd", { ...params }).then(res => {
                             resolve({
                                 data: res.result.records,
                                 total: res.result.total
@@ -53,6 +53,7 @@ const Index = (props) => {
                         title: "编号",
                         type: "input",
                         width: 100,
+                        isCopy: true,
                         formItemProps: {
                             placeholder: "请输入编号搜索"
                         }
@@ -60,18 +61,19 @@ const Index = (props) => {
                     {
                         dataIndex: "title",
                         title: "名称",
-                        width: 150
+                        width: 200
                     },
                     {
                         dataIndex: "description",
                         title: "描述",
-                        width: 150,
+                        width: 200,
+                        ellipsis: true,
                     },
                     {
                         title: '服务调用次数',
                         dataIndex: 'callNo',
                         sorter: true,
-                        width: 150,
+                        width: 200,
                         render: text => `${text} 万`,
                     },
                     {

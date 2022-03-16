@@ -1,5 +1,5 @@
 import Mock from 'mockjs';
-import { urlToJson } from '@/utils/utils';
+import { urlToJson, randomUUID } from '@/utils/utils';
 const mock = Mock.mock;
 Mock.setup({
     timeout: 400
@@ -13,19 +13,19 @@ for (let i = 0; i < 46; i += 1) {
         disabled: i % 6 === 0,
         no: `code${i}`,
         title: `一个任务名称${i}`,
-        callNo: Math.floor(Math.random() * 1000),
+        callNo: i,
         owner: '李结衣',
         description: '这是一段描述',
         status: Math.floor(Math.random() * 10) % 4,
-        updateTime: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
-        createTime: new Date(`2017-07-${Math.floor(i / 2) + 1}`),
+        updateTime: new Date(`2022-01-${Math.floor(i / 2) + 1}`),
+        createTime: new Date(`2022-01-${Math.floor(i / 2) + 1}`),
         progress: Math.ceil(Math.random() * 100),
     });
 }
 
 //查询分页列表
 mock(
-    RegExp('/api/tablelist' + ".*"), 'get', (options) => {
+    RegExp('/api/table/curd' + ".*"), 'get', (options) => {
         let newTableList = [...tableList];
         const params = urlToJson(options.url);
 
@@ -70,4 +70,43 @@ mock(
     }
 )
 
+//新增 列表项
+mock(
+    RegExp('/api/table/curd' + ".*"), 'post', (options) => {
+        const params = JSON.parse(options.body)
+        console.log('post', options, 'params', params)
+        tableList.unshift({
+            id: randomUUID(),
+            no: params.no,
+            title: params.title,
+            callNo: tableList.length,
+            owner: '李结衣',
+            description: params.description,
+            status: Math.floor(Math.random() * 10) % 4,
+            updateTime: new Date(),
+            createTime: new Date(),
+            progress: Math.ceil(Math.random() * 100),
+        })
+        return {
+            code: 200,
+            result: {
+                message: '添加成功'
+            }
+        }
+    }
+)
+
+//编辑 列表项
+mock(
+    RegExp('/api/table/curd' + ".*"), 'put', (options) => {
+
+    }
+)
+
+//删除 列表项
+mock(
+    RegExp('/api/table/curd' + ".*"), 'delete', (options) => {
+
+    }
+)
 
