@@ -110,6 +110,12 @@ const ProTable = forwardRef((props, ref) => {
     const tableFormRef = useRef();
 
     useImperativeHandle(ref, () => ({
+        fetchSearchData: (params) => {
+            setSearchFormValue((prevState) => {
+                return { ...prevState, ...params }
+            })
+        },
+
         reload: () => {
             fetchData();
             resetRowSelection();
@@ -117,7 +123,9 @@ const ProTable = forwardRef((props, ref) => {
     }));
 
     useEffect(() => {
-        if (!isEqual(prevPagination, pagination) || !isEqual(searchFormValue, prevSearchFormValue)) {
+        // console.log('prevPagination', prevPagination, 'pagination', pagination)
+        // console.log('prevSearchFormValue', prevSearchFormValue, 'searchFormValue', searchFormValue)
+        if (!isEqual(prevPagination, pagination) || !isEqual(prevSearchFormValue, searchFormValue)) {
             fetchData();
         }
     }, [searchFormValue, pagination]);

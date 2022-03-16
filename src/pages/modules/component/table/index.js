@@ -39,7 +39,7 @@ const Index = (props) => {
                 description="无需编写额外代码，简单配置即可生成简单的增删改查页面"
                 request={(params) => {
                     return new Promise((resolve, reject) => {
-                        getAction("/api/test", { ...params }).then(res => {
+                        getAction("/api/tablelist", { ...params }).then(res => {
                             resolve({
                                 data: res.result.records,
                                 total: res.result.total
@@ -60,8 +60,7 @@ const Index = (props) => {
                     {
                         dataIndex: "title",
                         title: "名称",
-                        width: 150,
-                        sorter: true
+                        width: 150
                     },
                     {
                         dataIndex: "description",
@@ -69,10 +68,11 @@ const Index = (props) => {
                         width: 150,
                     },
                     {
-                        dataIndex: "callNo",
-                        title: "服务调用次数",
-                        width: 100,
-                        render: (text) => `${text} 万`,
+                        title: '服务调用次数',
+                        dataIndex: 'callNo',
+                        sorter: true,
+                        width: 150,
+                        render: text => `${text} 万`,
                     },
                     {
                         dataIndex: "status",
@@ -117,9 +117,6 @@ const Index = (props) => {
                                             <Menu.Item key="1">
                                                 <a onClick={() => { }}>查看</a>
                                             </Menu.Item>
-                                            <Menu.Item key="2">
-                                                <a onClick={() => { }}>指派</a>
-                                            </Menu.Item>
                                         </Menu>
                                     }
                                 >
@@ -141,6 +138,12 @@ const Index = (props) => {
                         </Button>
                     </>
                 )}
+                onChange={(pagination, filters, sorter) => {
+                    //排序
+                    proTableRef.current.fetchSearchData({
+                        sorter: sorter.order ? `${sorter.field}_${sorter.order}` : ''
+                    })
+                }}
             />
             <AddEdit
                 ref={addEditRef}

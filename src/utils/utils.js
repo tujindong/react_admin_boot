@@ -5,7 +5,7 @@ export const transUrlToList = (url) => {
 }
 
 //获取url链接参数
-export const getQueryVariable = (variable, url) => {
+export const getQueryVariable = (variable, url = '') => {
     const urlParams = url.split("?")?.[1]
     const vars = urlParams.split("&");
     for (let i = 0; i < vars.length; i++) {
@@ -13,4 +13,20 @@ export const getQueryVariable = (variable, url) => {
         if (pair[0] == variable) { return pair[1]; }
     }
     return (false);
+}
+
+//url链接参数转为对象
+export const urlToJson = (url = '') => {
+    let obj = {},
+        index = url.indexOf('?'),
+        params = url.substring(index + 1);
+
+    if (index != -1) {
+        let parr = params.split('&');
+        for (let i of parr) {
+            let arr = i.split('=');
+            obj[arr[0]] = arr[1];
+        }
+    }
+    return obj;
 }

@@ -49,6 +49,10 @@ const TableForm = (props, ref) => {
 
     const [form] = Form.useForm();
 
+    useImperativeHandle(ref, () => ({
+        reset: () => { reset() }
+    }))
+
     const submit = () => {
         const values = form.getFieldsValue()
         if (props.onSubmit) {
@@ -56,16 +60,13 @@ const TableForm = (props, ref) => {
         }
     }
 
-    useImperativeHandle(ref, () => ({
-        reset: () => {
-            form.resetFields()
-            submit()
-        }
-    }))
+    const reset = () => {
+        form.resetFields()
+        submit()
+    }
 
     return (
         <Layout>
-            {/* layout='inline' ant design 4.X 会很挤*/}
             <Form
                 onFinish={() => {
                     submit()
@@ -91,7 +92,7 @@ const TableForm = (props, ref) => {
                         <Col xxl={6} xl={8} md={12} xs={24}>
                             <div style={{ marginLeft: '27px', marginBottom: '24px', padding: "0 20px 0 0" }}>
                                 <Button htmlType="submit" type="primary" style={{ marginLeft: 8 }}>查询</Button>
-                                <Button htmlType="reset" type="reset" style={{ marginLeft: 8 }}>重置</Button>
+                                <Button onClick={() => { reset() }} style={{ marginLeft: 8 }}>重置</Button>
                                 {filterForm.length > collapseNum && <div className="collapse" onClick={() => {
                                     setIsCollapse(prvState => !prvState)
                                 }}>
