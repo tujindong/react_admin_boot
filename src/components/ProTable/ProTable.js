@@ -263,6 +263,7 @@ const ProTable = forwardRef((props, ref) => {
         description = "",
         request,
         toolBarRender,
+        customToolBarRender,
         beforeSearchSubmit = (v) => v,
         rowSelection,
         pagination: tablePaginationConfig,
@@ -294,6 +295,7 @@ const ProTable = forwardRef((props, ref) => {
                         style={{
                             display: "flex",
                             justifyContent: "space-between",
+                            marginBottom: "10px"
                         }}
                     >
                         <div className="table-title">
@@ -306,12 +308,19 @@ const ProTable = forwardRef((props, ref) => {
                                 </span>
                             )}
                             {selectedRowKeys.length > 0 && (
-                                <span className="table-title-selection">已选中<span className="selection-num">{selectedRowKeys.length}</span>项</span>
+                                <>
+                                    <span className="table-title-selection">
+                                        <span>已选中</span>
+                                        <span className="selection-num">{selectedRowKeys.length}</span>
+                                        <span>项</span>
+                                    </span>
+                                </>
+
                             )}
                         </div>
                         {
                             <div style={{ textAlign: "right" }} className="mb20">
-                                {toolBarRender(this, {
+                                {toolBarRender({
                                     selectedRowKeys,
                                     selectedRows,
                                     dataSource,
@@ -330,6 +339,22 @@ const ProTable = forwardRef((props, ref) => {
                                 )}
                             </div>
                         }
+                    </div>
+                )}
+
+                {customToolBarRender && (
+                    <div
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginBottom: "10px"
+                        }}
+                    >
+                        {customToolBarRender({
+                            selectedRowKeys,
+                            selectedRows,
+                            dataSource,
+                        })}
                     </div>
                 )}
 

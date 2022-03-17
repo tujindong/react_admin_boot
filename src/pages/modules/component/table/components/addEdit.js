@@ -1,10 +1,13 @@
 import React, { useState, useImperativeHandle, forwardRef } from "react";
-import { Modal, Form, Input } from "antd";
+import { Modal, Form, Input, Select } from "antd";
 import { pick } from "lodash";
-import { postAction } from '@/request/manage';
+import { postAction, putAction } from '@/request/manage';
+import { message } from "antd";
 
 const AddEdit = (props, ref) => {
+    const { mapSource } = props;
     const [form] = Form.useForm();
+    const { Option } = Select;
 
     const [visible, setVisible] = useState(false);
     const [record, setRecord] = useState({});
@@ -12,11 +15,14 @@ const AddEdit = (props, ref) => {
 
     useImperativeHandle(ref, () => ({
         add: () => {
-            addEdit({});
+            addEdit({ modalType: '新增' });
         },
         edit: (record) => {
-            addEdit(record);
+            addEdit({ ...record, modalType: '编辑' });
         },
+        view: (record) => {
+            addEdit({ ...record, modalType: '查看' })
+        }
     }));
 
     const addEdit = (record) => {
@@ -27,7 +33,7 @@ const AddEdit = (props, ref) => {
     };
 
     const initFormData = (record) => {
-        const fieldList = ["no", "title", "description"];
+        const fieldList = ["no", "title", "description", "status"];
         form.setFieldsValue(pick(record, fieldList));
     };
 
@@ -54,7 +60,7 @@ const AddEdit = (props, ref) => {
                         },
                     ]}
                 >
-                    <Input placeholder="请输入编号" />
+                    <Input placeholder="请输入编号" disabled={record.modalType == '查看'} />
                 </Form.Item>
                 <Form.Item
                     label="名称"
@@ -66,7 +72,7 @@ const AddEdit = (props, ref) => {
                         },
                     ]}
                 >
-                    <Input placeholder="请输入名称" />
+                    <Input placeholder="请输入名称" disabled={record.modalType == '查看'} />
                 </Form.Item>
                 <Form.Item
                     label="描述"
@@ -78,7 +84,24 @@ const AddEdit = (props, ref) => {
                         },
                     ]}
                 >
-                    <Input placeholder="请输入描述" />
+                    <Input placeholder="请输入描述" disabled={record.modalType == '查看'} />
+                </Form.Item>
+                <Form.Item
+                    label="状态"
+                    name="status"
+                    rules={[
+                        {
+                            required: true,
+                            message: "请选择状态",
+                        },
+                    ]}
+                    initialValue={0}
+                >
+                    <Select placeholder="请选择状态" disabled={record.modalType == '查看'}>
+                        {mapSource.statusMaps.map((item, index) => (
+                            <Option key={index} value={item.value}>{item.label}</Option>
+                        ))}
+                    </Select>
                 </Form.Item>
             </Form>
         );
@@ -87,7 +110,7 @@ const AddEdit = (props, ref) => {
     return (
         <Modal
             width={700}
-            title={`${record?.id ? "编辑" : "新增"}`}
+            title={record.modalType}
             visible={visible}
             okText="确定"
             cancelText="取消"
@@ -96,7 +119,11 @@ const AddEdit = (props, ref) => {
                     .then(async (values) => {
                         const params = { ...record, ...values };
                         setSubmitLoading(true);
-                        postAction("/api/table/curd", params).then(res => {
+                        const action = record?.id ?
+                            putAction('/api/table/crud', params) :
+                            postAction('/api/table/crud', params)
+                        action.then(res => {
+                            message.success(res.message);
                             props.onOk && props.onOk();
                             setSubmitLoading(false);
                             setVisible(false);
@@ -108,6 +135,7 @@ const AddEdit = (props, ref) => {
             onCancel={() => {
                 setVisible(false);
             }}
+            destroyOnClose
         >
             {renderFormDom()}
         </Modal>
