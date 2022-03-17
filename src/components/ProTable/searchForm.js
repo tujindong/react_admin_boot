@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
+import React, { useState, useImperativeHandle, forwardRef } from 'react'
 import { Form, Button, Row, Col } from 'antd'
 import styled from 'styled-components';
-import FilterControl from './filterControl'
+import FormControls from '@/components/FormControls';
 const Layout = styled.div`
     height: 100%;
     background: #ffffff;
@@ -75,15 +75,13 @@ const TableForm = (props, ref) => {
                 form={form}
             >
                 <Row gutter={[24, 24]} type="flex" align="middle">
-                    {/* xs sm md lg xl  xxl */}
-                    {/* filterForm的长度超过2个，则展开 收起 */}
                     {filterForm.map((item, index) => (
                         (((index + 1) > collapseNum && !isCollapse) || (index + 1) <= collapseNum) && <Col xxl={6} xl={8} md={12} xs={24} key={index}>
                             <Form.Item style={{ width: '100%' }}
                                 label={item.formItemProps?.labelTitle || item.title}
                                 initialValue={item.initialValue}
                                 name={item.key}>
-                                {FilterControl.getControlComponent(item.type, { ...item })}
+                                {FormControls.getControlComponent(item.type, { ...item })}
                             </Form.Item>
                         </Col>
 

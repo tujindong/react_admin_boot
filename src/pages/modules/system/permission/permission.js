@@ -85,7 +85,7 @@ const DemoList = (props) => {
                         ),
                     },
                 ]}
-                toolBarRender={(actions, { selectedRowKeys, selectedRows }) => (
+                toolBarRender={({ selectedRowKeys, selectedRows }) => (
                     <>
                         <Button
                             type="primary"

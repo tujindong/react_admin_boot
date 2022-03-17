@@ -30,7 +30,7 @@ export const asyncImportComponent = (importComp) => {
                         setComponent(() => importComponent)
                     }
                 } catch (e) {
-                    props.history.replace('/404')
+                    // props.history.replace('/404')
                 }
             }
             fetchComponent()
