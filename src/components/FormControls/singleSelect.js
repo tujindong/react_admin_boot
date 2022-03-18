@@ -5,10 +5,10 @@ const SingleSelect = (props, ref) => {
     const Option = Select.Option;
     let {
         value,
-        onChange = () =>{},
+        onChange = () => { },
         formItemProps: {
             placeholder = '请选择',
-            options
+            options = [],
         } = {}
     } = props
     options = typeof options === 'function' ? options() : options
