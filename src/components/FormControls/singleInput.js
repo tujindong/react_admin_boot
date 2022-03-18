@@ -14,9 +14,8 @@ const SingleInput = (props, ref) => {
             style={{ width: "100%" }}
             placeholder={placeholder}
             value={value}
-            onChange={(e) => {
-                onChange(e.target.value);
-            }} />
+            onChange={(e) => { onChange(e.target.value) }}
+        />
     )
 }
 

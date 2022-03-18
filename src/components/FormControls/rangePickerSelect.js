@@ -10,7 +10,8 @@ const RangePickerSelect = (props, ref) => {
         onChange,
         formItemProps: {
             placeholder = '请输入'
-        } = {}
+        } = {},
+        ...other
     } = props
     const transformTimeToDate = (values) => {
         if (Array.isArray(values) && values.length === 2) {
@@ -28,10 +29,9 @@ const RangePickerSelect = (props, ref) => {
             style={{ width: "100%" }}
             placeholder={placeholder}
             value={transformTimeToDate(value)}
-            onChange={(e, s) => {
-                // console.warn('RangePicker', e, s)
-                onChange(s);
-            }} />
+            onChange={(e, s) => { onChange(s) }}
+            {...other}
+        />
     )
 }
 

@@ -8,7 +8,8 @@ const CascaderIndex = (props, ref) => {
         formItemProps: {
             placeholder = '请选择',
             options = [],
-        } = {}
+        } = {},
+        ...other
     } = props
     return (
         <Cascader
@@ -18,6 +19,7 @@ const CascaderIndex = (props, ref) => {
             onChange={(e) => {
                 onChange(e)
             }}
+            {...other}
         />
     )
 }

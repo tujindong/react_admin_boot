@@ -9,7 +9,8 @@ const multiSelect = (props, ref) => {
         formItemProps: {
             placeholder = '请输入提示内容',
             options
-        } = {}
+        } = {},
+        ...other
     } = props
     options = typeof options === 'function' ? options() : options
 
@@ -17,17 +18,18 @@ const multiSelect = (props, ref) => {
         <Select
             mode="multiple"
             allowClear
-            defaultValue={['a','b']}
-            value={value? value.split(','):[]}
-            style={{ width: '300px' }}
+            value={value}
+            style={{ width: '100%' }}
             placeholder={placeholder}
-            onChange={(e) => {
-               onChange(e.join(','))
-            }}
+            onChange={(e) => { onChange(e) }}
+            {...other}
         >
-            {
-              options.map(item => (<Option value={item.value} key={item.value} >{item.label}</Option>))
-            }
+            {options.map(item => (
+                <Option
+                    value={item.value}
+                    key={item.value}
+                >{item.label}</Option>
+            ))}
         </Select>
     )
 }

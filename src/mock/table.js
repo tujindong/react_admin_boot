@@ -65,13 +65,13 @@ mock(
         const pageSize = params.pageSize;
         newTableList = valideTableList.slice((pageNo - 1) * pageSize, pageNo * pageSize);
 
-        console.log(
-            'options', options,
-            'params', params,
-            'tableList', tableList,
-            'newTableList', newTableList,
-            'valideTableList', valideTableList
-        )
+        // console.log(
+        //     'options', options,
+        //     'params', params,
+        //     'tableList', tableList,
+        //     'newTableList', newTableList,
+        //     'valideTableList', valideTableList
+        // )
         return {
             code: 200,
             result: {

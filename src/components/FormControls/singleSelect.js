@@ -13,9 +13,13 @@ const SingleSelect = (props, ref) => {
     } = props
     options = typeof options === 'function' ? options() : options
     return (
-        <Select style={{ width: "100%" }} allowClear placeholder={placeholder} value={value} onChange={(e) => {
-            onChange(e);
-        }}>
+        <Select
+            style={{ width: "100%" }}
+            allowClear
+            placeholder={placeholder}
+            value={value}
+            onChange={(e) => { onChange(e) }}
+        >
             {options && options.map(item => (<Option value={item.value} key={item.value}>{item.label}</Option>))}
         </Select>
     )
